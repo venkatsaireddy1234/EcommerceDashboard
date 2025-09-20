@@ -12,7 +12,7 @@ import RestoreIcon from "@mui/icons-material/Restore";
 import StarTwoToneIcon from "@mui/icons-material/StarTwoTone";
 import NotificationsNoneTwoToneIcon from "@mui/icons-material/NotificationsNoneTwoTone";
 import { styled } from "@mui/material/styles";
-import { useTheme as useMuiTheme } from "@mui/material/styles"; // Add this line
+import { useTheme as useMuiTheme } from "@mui/material/styles";
 import { DarkMode, LightMode } from "@mui/icons-material";
 import { useTheme } from "../../context/ThemeContext";
 
@@ -36,17 +36,36 @@ const NavBar = ({ currentPath }) => {
 
   return (
     <AppBar
-      position="static"
       color="inherit"
-      elevation={1}
+      elevation={0}
       sx={{
-        width: "auto",
-        m: 2,
-        borderRadius: 1,
+        width: 948,
+        height: 68,
+        minWidth: 1050,
+        right: "385px",
+        borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
+        borderRadius: 0,
         bgcolor: theme.palette.background.paper,
+        display: "flex",
+        justifyContent: "space-between",
+        px: "28px",
+        pt: "20px",
+        pb: "20px",
+        opacity: 1,
+        boxSizing: "border-box",
       }}
     >
-      <Toolbar>
+      <Toolbar
+        disableGutters
+        sx={{
+          minHeight: "0 !important",
+          height: "100%",
+          width: "100%",
+          px: 0,
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
         {/* Left Division */}
         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
           <IconButton>

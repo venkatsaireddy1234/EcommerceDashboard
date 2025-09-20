@@ -9,7 +9,6 @@ import {
   Typography,
   styled,
   Collapse,
-  ListItemButton,
 } from "@mui/material";
 import {
   Dashboard as DashboardIcon,
@@ -40,9 +39,9 @@ const StyledListItem = styled(ListItem)(({ theme, active }) => ({
     backgroundColor: theme.palette.action.hover,
   },
   ...(active && {
-    backgroundColor: theme.palette.primary.light,
+    backgroundColor: theme.palette.mode === "light" ? "#f0f0f0" : "#333",
     "&:hover": {
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: theme.palette.mode === "light" ? "#e0e0e0" : "#222",
     },
   }),
   "& .MuiListItemIcon-root": {
@@ -107,11 +106,11 @@ const commonIconStyles = (theme) => ({
   fontSize: 20,
   minWidth: "25px",
 });
-const SideBar = ({ onPathChange }) => {
+const SideBar = ({ onPathChange, onPageChange }) => {
   const theme = useMuiTheme();
   const typographyStyles = getTypographyStyles(theme);
 
-  const [activeItem] = useState("Default");
+  const [activeItem, setActiveItem] = useState("Default");
   const [openSections, setOpenSections] = useState({});
 
   const handleSectionClick = (section) => {
@@ -123,10 +122,19 @@ const SideBar = ({ onPathChange }) => {
 
   const handleItemClick = (parentText, item) => {
     setActiveItem(item);
+
+    // Set path
     if (parentText) {
       onPathChange(`${parentText} / ${item}`);
     } else {
       onPathChange(`Dashboard / ${item}`);
+    }
+
+    // Set page
+    if (item === "Orders") {
+      onPageChange("orders");
+    } else if (item === "eCommerce" || item === "Default") {
+      onPageChange("ecommerce");
     }
   };
 
