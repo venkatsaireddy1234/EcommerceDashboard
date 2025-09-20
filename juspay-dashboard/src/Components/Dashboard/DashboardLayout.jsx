@@ -1,7 +1,5 @@
-import NavBar from "./NavBar";
 import { Box } from "@mui/material";
-import Ecommerce from "./Ecommerce";
-import OrdersPage from "./OrdersPage";
+import NavBar from "./Ecommerce/NavBar";
 
 const DashboardLayout = ({ children }) => (
   <Box>

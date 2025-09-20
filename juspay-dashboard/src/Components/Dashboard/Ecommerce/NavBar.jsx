@@ -14,7 +14,7 @@ import NotificationsNoneTwoToneIcon from "@mui/icons-material/NotificationsNoneT
 import { styled } from "@mui/material/styles";
 import { useTheme as useMuiTheme } from "@mui/material/styles";
 import { DarkMode, LightMode } from "@mui/icons-material";
-import { useTheme } from "../../context/ThemeContext";
+import { useTheme } from "../../../context/ThemeContext";
 
 const SearchWrapper = styled("div")(({ theme }) => ({
   position: "relative",

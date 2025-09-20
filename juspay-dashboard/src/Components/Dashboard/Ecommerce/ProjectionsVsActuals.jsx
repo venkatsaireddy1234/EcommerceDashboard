@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-const ProjectsVsActuals = () => {
+const ProjectionsVsActuals = () => {
   const theme = useTheme();
   const barGraphImg =
     theme.palette.mode === "light" ? "/VerticalBar.png" : "/BarGraph.png";
@@ -181,4 +181,4 @@ const ProjectsVsActuals = () => {
   );
 };
 
-export default ProjectsVsActuals;
+export default ProjectionsVsActuals;

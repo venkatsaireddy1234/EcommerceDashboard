@@ -3,13 +3,14 @@ import { ThemeProvider as MuiThemeProvider, createTheme } from "@mui/material";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import DashboardLayout from "./Components/Dashboard/DashboardLayout";
-import Ecommerce from "./Components/Dashboard/Ecommerce";
 import OrdersPage from "./Components/Dashboard/OrdersPage";
 import { Box } from "@mui/material";
 import { useState } from "react";
 import { ThemeProvider } from "./context/ThemeContext";
 import { useTheme } from "./context/ThemeContext";
 import SideBar from "./Components/Dashboard/SideBar";
+import Ecommerce from "./Components/Dashboard/Ecommerce/Ecommerce";
+import RightBar from "./Components/Dashboard/RightBar/RightBar";
 
 function Layout() {
   const [currentPath, setCurrentPath] = useState("Dashboard / Ecommerce");
@@ -63,6 +64,16 @@ function Layout() {
             )}
             {currentPage === "orders" && <OrdersPage />}
           </Box>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            marginLeft: "auto",
+          }}
+        >
+          <RightBar />
         </Box>
       </Box>
     </MuiThemeProvider>
