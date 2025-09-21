@@ -56,10 +56,9 @@ const NavBar = ({ currentPath, onNotificationClick, notificationIcon }) => {
             return (
               <Box
                 sx={{
-                  width: 184,
+                  width: 194,
                   height: 28,
                   borderRadius: 8,
-                  bgcolor: "var(--black-40, #FFFFFF66)",
                   display: "flex",
                   alignItems: "center",
                   opacity: 1,
@@ -73,7 +72,6 @@ const NavBar = ({ currentPath, onNotificationClick, notificationIcon }) => {
                     fontWeight: 500,
                     fontSize: 16,
                     lineHeight: "28px",
-                    background: "transparent",
                     color: "grey",
                     opacity: 1,
                     px: 1,
@@ -89,7 +87,6 @@ const NavBar = ({ currentPath, onNotificationClick, notificationIcon }) => {
                     fontWeight: 500,
                     fontSize: 16,
                     lineHeight: "28px",
-                    background: "transparent",
                     color: "grey",
                     opacity: 1,
                     px: 1,
@@ -105,10 +102,10 @@ const NavBar = ({ currentPath, onNotificationClick, notificationIcon }) => {
                     fontWeight: 500,
                     fontSize: 16,
                     lineHeight: "28px",
-                    background: "transparent",
-                    color: "#000",
+                    color: theme.palette.mode === "dark" ? "#fff" : "#1C1C1C",
                     opacity: 1,
                     px: 1,
+                    py: 1,
                   }}
                 >
                   {path[1]}
