@@ -9,12 +9,13 @@ import {
 import { useTheme } from "@mui/material/styles";
 import { useTheme as useCustomTheme } from "../../../../context/ThemeContext";
 import NavBarSearch from "./NavBarSearch";
-import { leftIcons, rightIcons, notificationIcon } from "./NavBarIconsConfig";
+import { leftIcons, rightIcons } from "./NavBarIconsConfig";
 import { getSidebarBorder, getIconStyle } from "./NavBarThemeUtils";
 import DarkMode from "@mui/icons-material/DarkMode";
 import LightMode from "@mui/icons-material/LightMode";
+import NotificationsNoneTwoToneIcon from "@mui/icons-material/NotificationsNoneTwoTone";
 
-const NavBar = ({ currentPath, onNotificationClick }) => {
+const NavBar = ({ currentPath, onNotificationClick, notificationIcon }) => {
   const theme = useTheme();
   const { mode, toggleMode } = useCustomTheme();
   const iconStyle = getIconStyle(theme);
@@ -134,7 +135,13 @@ const NavBar = ({ currentPath, onNotificationClick }) => {
               <LightMode sx={iconStyle} />
             )}
           </IconButton>
-
+          <IconButton onClick={onNotificationClick}>
+            {notificationIcon ? (
+              <notificationIcon sx={iconStyle} />
+            ) : (
+              <NotificationsNoneTwoToneIcon sx={iconStyle} />
+            )}
+          </IconButton>
           {rightIcons.map(({ key, icon: Icon }) => (
             <IconButton key={key}>
               <Stack direction="row" alignItems="center" spacing={0.5}>
@@ -142,10 +149,6 @@ const NavBar = ({ currentPath, onNotificationClick }) => {
               </Stack>
             </IconButton>
           ))}
-
-          <IconButton onClick={onNotificationClick}>
-            {notificationIcon && <notificationIcon sx={iconStyle} />}
-          </IconButton>
         </Box>
       </Toolbar>
     </AppBar>
