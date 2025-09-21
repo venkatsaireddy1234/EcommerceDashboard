@@ -1,12 +1,11 @@
 import { Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import CardsGrid from "./CardsGrid";
-import RevenueByLocation from "./RevenueByLocation";
-import TopSellingProducts from "./TopSellingProducts";
-import TotalSales from "./TotalSales";
-import Revenue from "./Revenue";
-import SalesBarChart from "./SalesBarChart";
-import LineChart from "./LineGraph";
+import CardsGrid from "./CardsGrid/CardsGrid";
+import TopSellingProducts from "./TopSellingProducts/TopSellingProducts";
+import Revenue from "./Revenue/Revenue";
+import RevenueByLocation from "./RevenueByLocation/RevenueByLocation";
+import TotalSales from "./TotalSales/TotalSales";
+import ProjectionsVsActuals from "./ProjectionsBarChart/ProjectionsVsActuals";
 
 const Ecommerce = ({ onOrdersClick, currentPath }) => {
   const theme = useTheme();
@@ -46,7 +45,7 @@ const Ecommerce = ({ onOrdersClick, currentPath }) => {
           }}
         >
           <CardsGrid onOrdersClick={onOrdersClick} />
-          <SalesBarChart />
+          <ProjectionsVsActuals />
         </Box>
         <Box
           sx={{
@@ -57,8 +56,7 @@ const Ecommerce = ({ onOrdersClick, currentPath }) => {
             px: 3,
           }}
         >
-          {/* <Revenue /> */}
-          <LineChart />
+          <Revenue />
           <RevenueByLocation />
         </Box>
         <Box

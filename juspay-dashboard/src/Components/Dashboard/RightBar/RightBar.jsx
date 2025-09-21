@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
-import Notifications from "./Notifications";
-import Contacts from "./Contacts";
-import Activities from "./Activities";
+import Activities from "./Activities/Activities";
+import Notifications from "./Notifications/Notifications";
+import Contacts from "./Contacts/Contacts";
 
 const RightBar = () => (
   <Box
@@ -15,7 +15,6 @@ const RightBar = () => (
       flexDirection: "column",
       alignItems: "start",
       boxSizing: "border-box",
-      // background: (theme) => theme.palette.background.paper,
       marginLeft: 3,
     }}
   >

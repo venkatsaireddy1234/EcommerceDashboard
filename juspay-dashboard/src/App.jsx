@@ -6,11 +6,11 @@ import { Box } from "@mui/material";
 import { useState } from "react";
 import { ThemeProvider } from "./context/ThemeContext";
 import { useTheme } from "./context/ThemeContext";
-import SideBar from "./Components/Dashboard/SideBar";
+import SideBar from "./Components/Dashboard/SideBar/SideBar";
 import Ecommerce from "./Components/Dashboard/Ecommerce/Ecommerce";
 import RightBar from "./Components/Dashboard/RightBar/RightBar";
-import NavBar from "./Components/Dashboard/Ecommerce/NavBar";
-import OrdersPage from "./Components/Dashboard/OrdersPage";
+import NavBar from "./Components/Dashboard/Ecommerce/NavBar/NavBar";
+import OrdersPage from "./Components/Dashboard/Orders/OrdersPage";
 
 function Layout() {
   // Set rightBarOpen to true by default so RightBar is open on initial render

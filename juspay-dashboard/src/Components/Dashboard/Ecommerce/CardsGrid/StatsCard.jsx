@@ -2,6 +2,7 @@ import { Box, Paper, Stack, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import TrendingUp from "@mui/icons-material/TrendingUp";
 import TrendingDown from "@mui/icons-material/TrendingDown";
+import { getCardColors } from "./cardUtils";
 
 const StatsCard = ({
   title,
@@ -13,6 +14,7 @@ const StatsCard = ({
   textColor,
 }) => {
   const theme = useTheme();
+  const { cardBg, cardText } = getCardColors(theme, bgcolor, textColor);
 
   return (
     <Paper
@@ -25,11 +27,7 @@ const StatsCard = ({
         gap: 1,
         borderRadius: 2,
         p: 3,
-        bgcolor: bgcolor
-          ? bgcolor
-          : theme.palette.mode === "light"
-          ? "#f5f5f5"
-          : "#232323",
+        bgcolor: cardBg,
         border: `1px solid ${theme.palette.divider}`,
         opacity: 1,
         transform: "rotate(0deg)",
@@ -55,7 +53,6 @@ const StatsCard = ({
       >
         <Typography
           variant="subtitle2"
-          color="text.secondary"
           sx={{
             width: "100%",
             height: "100%",
@@ -65,9 +62,7 @@ const StatsCard = ({
             fontSize: 14,
             lineHeight: "20px",
             letterSpacing: 0,
-            color:
-              textColor ||
-              (theme.palette.mode === "light" ? "#232323" : "#fff"),
+            color: cardText,
           }}
         >
           {title}
@@ -82,33 +77,29 @@ const StatsCard = ({
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          color:
-            textColor || (theme.palette.mode === "light" ? "#232323" : "#fff"),
+          color: cardText,
         }}
       >
         <Typography
           variant="h4"
           sx={{
             fontSize: 22,
-            color:
-              textColor ||
-              (theme.palette.mode === "light" ? "#232323" : "#fff"),
+            color: cardText,
           }}
         >
           {value}
         </Typography>
         <Typography
           variant="body2"
-          color={"dark"}
-          sx={{ fontWeight: 500, fontSize: 16 }}
+          sx={{ fontWeight: 500, fontSize: 16, color: cardText }}
         >
           {percentage}%
         </Typography>
         <Stack direction="row" alignItems="center" spacing={0.5}>
           {isIncrease ? (
-            <TrendingUp sx={{ color: "dark", fontSize: 15 }} />
+            <TrendingUp sx={{ color: cardText, fontSize: 15 }} />
           ) : (
-            <TrendingDown sx={{ color: "dark", fontSize: 15 }} />
+            <TrendingDown sx={{ color: cardText, fontSize: 15 }} />
           )}
         </Stack>
       </Box>
@@ -116,51 +107,4 @@ const StatsCard = ({
   );
 };
 
-const CardsGrid = ({ onOrdersClick }) => (
-  <Box
-    sx={{
-      width: 432,
-      height: 252,
-      gap: 3.5,
-      opacity: 1,
-      borderRadius: 2,
-      display: "grid",
-      gridTemplateColumns: "1fr 1fr",
-      gridTemplateRows: "1fr 1fr",
-      background: "none",
-      p: 0,
-    }}
-  >
-    <StatsCard
-      title="Customers"
-      value="2,420"
-      percentage={12.5}
-      isIncrease={true}
-      bgcolor="#E3F5FF"
-      textColor="#232323"
-    />
-    <StatsCard
-      title="Orders"
-      value="1,210"
-      percentage={8.1}
-      isIncrease={false}
-      onClick={onOrdersClick}
-    />
-    <StatsCard
-      title="Revenue"
-      value="$8,120"
-      percentage={15.3}
-      isIncrease={true}
-    />
-    <StatsCard
-      title="Growth"
-      value="21.8%"
-      percentage={32.7}
-      isIncrease={true}
-      bgcolor="#E5ECF6"
-      textColor="#232323"
-    />
-  </Box>
-);
-
-export default CardsGrid;
+export default StatsCard;
