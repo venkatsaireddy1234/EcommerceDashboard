@@ -140,7 +140,7 @@ const OrdersPage = () => {
     visibleOrders.every((order) => checked[order.orderId]);
 
   return (
-    <Box sx={{ mt: 4 }}>
+    <Box sx={{ mt: 2 }}>
       <Box sx={{ p: 3 }}>
         <Box
           sx={{

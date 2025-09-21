@@ -3,7 +3,6 @@ import { ThemeProvider as MuiThemeProvider, createTheme } from "@mui/material";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import DashboardLayout from "./Components/Dashboard/DashboardLayout";
-import OrdersPage from "./Components/Dashboard/OrdersPage";
 import { Box } from "@mui/material";
 import { useState } from "react";
 import { ThemeProvider } from "./context/ThemeContext";
@@ -11,11 +10,19 @@ import { useTheme } from "./context/ThemeContext";
 import SideBar from "./Components/Dashboard/SideBar";
 import Ecommerce from "./Components/Dashboard/Ecommerce/Ecommerce";
 import RightBar from "./Components/Dashboard/RightBar/RightBar";
+import NavBar from "./Components/Dashboard/Ecommerce/NavBar";
+import OrdersPage from "./Components/Dashboard/OrdersPage";
 
 function Layout() {
+  const [rightBarOpen, setRightBarOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState("ecommerce");
   const [currentPath, setCurrentPath] = useState("Dashboard / Ecommerce");
-  const [currentPage, setCurrentPage] = useState("ecommerce"); // default is ecommerce
   const { mode } = useTheme();
+
+  const handleNotificationClick = () => {
+    console.log("Notification icon clicked");
+    setRightBarOpen((prev) => !prev);
+  };
 
   const theme = createTheme({
     palette: {
@@ -44,15 +51,16 @@ function Layout() {
         }}
       >
         <SideBar onPathChange={setCurrentPath} onPageChange={setCurrentPage} />
+        {/* Main content + RightBar in the same flex row */}
         <Box
           sx={{
             display: "flex",
             flex: 1,
-            overflow: "auto",
+            overflow: "hidden",
             flexDirection: "row",
           }}
         >
-          {/* Main content */}
+          {/* Main content column */}
           <Box
             sx={{
               display: "flex",
@@ -61,7 +69,16 @@ function Layout() {
               minWidth: 0,
             }}
           >
-            <Box>
+            <NavBar
+              currentPath={currentPath}
+              onNotificationClick={handleNotificationClick}
+            />
+            <Box
+              sx={{
+                flex: 1,
+                minWidth: 0,
+              }}
+            >
               {currentPage === "ecommerce" && (
                 <Ecommerce
                   onOrdersClick={() => {
@@ -72,7 +89,29 @@ function Layout() {
                 />
               )}
               {currentPage === "orders" && <OrdersPage />}
+              {/* ...other pages... */}
             </Box>
+          </Box>
+          {/* RightBar sits next to main content */}
+          <Box
+            sx={{
+              width: rightBarOpen ? 320 : 0,
+              minWidth: rightBarOpen ? 320 : 0,
+              maxWidth: rightBarOpen ? 320 : 0,
+              transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+              bgcolor: "background.paper",
+              boxSizing: "border-box",
+              height: "100vh",
+              overflowY: "auto",
+              borderLeft: rightBarOpen
+                ? (theme) =>
+                    `2px solid ${
+                      theme.palette.mode === "dark" ? "#222" : "#E0E0E0"
+                    }`
+                : "none",
+            }}
+          >
+            {rightBarOpen && <RightBar />}
           </Box>
         </Box>
       </Box>

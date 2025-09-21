@@ -114,6 +114,7 @@ const TopSellingProducts = () => {
             ? "#1C1C1C"
             : "var(--Primary-Light, #F7F9FB)",
         mt: 3,
+        mb: 4,
       }}
     >
       {/* Title - Number="1" */}

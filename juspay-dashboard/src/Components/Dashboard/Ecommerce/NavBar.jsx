@@ -124,7 +124,7 @@ const NavBar = ({ currentPath, onNotificationClick }) => {
           </IconButton>
 
           <IconButton onClick={onNotificationClick}>
-            <NotificationsNoneTwoToneIcon sx={iconStyle} />
+            <NotificationsNoneTwoToneIcon />
           </IconButton>
 
           <IconButton>
