@@ -1,13 +1,7 @@
 import { StrictMode } from "react";
 import { ThemeProvider as MuiThemeProvider, createTheme } from "@mui/material";
 import "./App.css";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
-import DashboardLayout from "./Components/Dashboard/DashboardLayout";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { Box } from "@mui/material";
 import { useState } from "react";
 import { ThemeProvider } from "./context/ThemeContext";
