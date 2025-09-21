@@ -8,15 +8,15 @@ const RightBar = () => (
     sx={{
       width: 280,
       height: 1206,
-      minWidth: 280,
+      minWidth: 430,
       opacity: 1,
-      p: 2.5,
-      borderLeft: (theme) => `1px solid ${theme.palette.divider}`,
+      py: 2.5,
       display: "flex",
       flexDirection: "column",
-      alignItems: "center",
+      alignItems: "start",
       boxSizing: "border-box",
-      background: (theme) => theme.palette.background.paper,
+      // background: (theme) => theme.palette.background.paper,
+      marginLeft: 3,
     }}
   >
     <Notifications />

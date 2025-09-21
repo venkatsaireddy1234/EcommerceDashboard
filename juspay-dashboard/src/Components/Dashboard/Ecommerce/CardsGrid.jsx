@@ -3,7 +3,15 @@ import { useTheme } from "@mui/material/styles";
 import TrendingUp from "@mui/icons-material/TrendingUp";
 import TrendingDown from "@mui/icons-material/TrendingDown";
 
-const StatsCard = ({ title, value, percentage, isIncrease, onClick }) => {
+const StatsCard = ({
+  title,
+  value,
+  percentage,
+  isIncrease,
+  onClick,
+  bgcolor,
+  textColor,
+}) => {
   const theme = useTheme();
 
   return (
@@ -14,10 +22,14 @@ const StatsCard = ({ title, value, percentage, isIncrease, onClick }) => {
         width: 202,
         height: 112,
         minWidth: 200,
-        gap: 1, // 8px
-        borderRadius: 2, // 16px
-        p: 3, // 24px
-        bgcolor: theme.palette.mode === "light" ? "#f5f5f5" : "#232323",
+        gap: 1,
+        borderRadius: 2,
+        p: 3,
+        bgcolor: bgcolor
+          ? bgcolor
+          : theme.palette.mode === "light"
+          ? "#f5f5f5"
+          : "#232323",
         border: `1px solid ${theme.palette.divider}`,
         opacity: 1,
         transform: "rotate(0deg)",
@@ -29,14 +41,13 @@ const StatsCard = ({ title, value, percentage, isIncrease, onClick }) => {
         alignItems: "flex-start",
       }}
     >
-      {/* Title */}
       <Box
         sx={{
           width: 154,
           height: 20,
-          gap: 1, // 8px
+          gap: 1,
           opacity: 1,
-          borderRadius: 1, // 8px
+          borderRadius: 1,
           display: "flex",
           alignItems: "center",
           mb: 1,
@@ -54,44 +65,51 @@ const StatsCard = ({ title, value, percentage, isIncrease, onClick }) => {
             fontSize: 14,
             lineHeight: "20px",
             letterSpacing: 0,
-            // Type="Single"
-            // Hover=False
+            color:
+              textColor ||
+              (theme.palette.mode === "light" ? "#232323" : "#fff"),
           }}
         >
           {title}
         </Typography>
       </Box>
-      {/* Value & Percentage */}
       <Box
         sx={{
           width: 154,
           height: 36,
-          borderRadius: 1, // 8px
+          borderRadius: 1,
           opacity: 1,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          gap: 1, // 8px
-          // Type="Right & Left"
-          // Hover=False
+          color:
+            textColor || (theme.palette.mode === "light" ? "#232323" : "#fff"),
         }}
       >
-        <Typography variant="h4" color="text.primary" sx={{ fontSize: 22 }}>
+        <Typography
+          variant="h4"
+          sx={{
+            fontSize: 22,
+            color:
+              textColor ||
+              (theme.palette.mode === "light" ? "#232323" : "#fff"),
+          }}
+        >
           {value}
+        </Typography>
+        <Typography
+          variant="body2"
+          color={"dark"}
+          sx={{ fontWeight: 500, fontSize: 16 }}
+        >
+          {percentage}%
         </Typography>
         <Stack direction="row" alignItems="center" spacing={0.5}>
           {isIncrease ? (
-            <TrendingUp sx={{ color: "success.main", fontSize: 20 }} />
+            <TrendingUp sx={{ color: "dark", fontSize: 15 }} />
           ) : (
-            <TrendingDown sx={{ color: "error.main", fontSize: 20 }} />
+            <TrendingDown sx={{ color: "dark", fontSize: 15 }} />
           )}
-          <Typography
-            variant="body2"
-            color={isIncrease ? "success.main" : "error.main"}
-            sx={{ fontWeight: 500, fontSize: 16 }}
-          >
-            {percentage}%
-          </Typography>
         </Stack>
       </Box>
     </Paper>
@@ -103,7 +121,7 @@ const CardsGrid = ({ onOrdersClick }) => (
     sx={{
       width: 432,
       height: 252,
-      gap: 3.5, // 28px
+      gap: 3.5,
       opacity: 1,
       borderRadius: 2,
       display: "grid",
@@ -118,6 +136,8 @@ const CardsGrid = ({ onOrdersClick }) => (
       value="2,420"
       percentage={12.5}
       isIncrease={true}
+      bgcolor="#E3F5FF"
+      textColor="#232323"
     />
     <StatsCard
       title="Orders"
@@ -137,6 +157,8 @@ const CardsGrid = ({ onOrdersClick }) => (
       value="21.8%"
       percentage={32.7}
       isIncrease={true}
+      bgcolor="#E5ECF6"
+      textColor="#232323"
     />
   </Box>
 );

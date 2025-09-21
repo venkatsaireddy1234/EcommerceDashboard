@@ -23,12 +23,12 @@ function Layout() {
       primary: { main: "#1976d2" },
       secondary: { main: "#dc004e" },
       background: {
-        default: mode === "light" ? "#ffffff" : "#121212",
-        paper: mode === "light" ? "#ffffff" : "#1e1e1e",
+        default: mode === "light" ? "#fff" : "#000",
+        paper: mode === "light" ? "#fff" : "#000", // <-- changed here
       },
       text: {
-        primary: mode === "light" ? "#1C1C1C" : "#ffffff",
-        secondary: mode === "light" ? "#1C1C1C66" : "#ffffff66",
+        primary: mode === "light" ? "#1C1C1C" : "#fff",
+        secondary: mode === "light" ? "#1C1C1C66" : "#fff",
       },
     },
   });
@@ -47,33 +47,33 @@ function Layout() {
         <Box
           sx={{
             display: "flex",
-            flexDirection: "column",
             flex: 1,
             overflow: "auto",
+            flexDirection: "row",
           }}
         >
-          <Box sx={{ p: 3 }}>
-            {currentPage === "ecommerce" && (
-              <Ecommerce
-                onOrdersClick={() => {
-                  setCurrentPage("orders");
-                  setCurrentPath("Dashboard / Orders");
-                }}
-                currentPath={currentPath}
-              />
-            )}
-            {currentPage === "orders" && <OrdersPage />}
+          {/* Main content */}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              flex: 1,
+              minWidth: 0,
+            }}
+          >
+            <Box>
+              {currentPage === "ecommerce" && (
+                <Ecommerce
+                  onOrdersClick={() => {
+                    setCurrentPage("orders");
+                    setCurrentPath("Dashboard / Orders");
+                  }}
+                  currentPath={currentPath}
+                />
+              )}
+              {currentPage === "orders" && <OrdersPage />}
+            </Box>
           </Box>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            marginLeft: "auto",
-          }}
-        >
-          <RightBar />
         </Box>
       </Box>
     </MuiThemeProvider>

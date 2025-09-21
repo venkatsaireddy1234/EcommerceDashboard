@@ -7,52 +7,53 @@ import {
   Box,
   Stack,
 } from "@mui/material";
-import { MenuBook, Search, Bookmark } from "@mui/icons-material";
+import {
+  MenuBook,
+  Search,
+  Bookmark,
+  DarkMode,
+  LightMode,
+} from "@mui/icons-material";
 import RestoreIcon from "@mui/icons-material/Restore";
 import StarTwoToneIcon from "@mui/icons-material/StarTwoTone";
 import NotificationsNoneTwoToneIcon from "@mui/icons-material/NotificationsNoneTwoTone";
-import { styled } from "@mui/material/styles";
-import { useTheme as useMuiTheme } from "@mui/material/styles";
-import { DarkMode, LightMode } from "@mui/icons-material";
-import { useTheme } from "../../../context/ThemeContext";
+import { styled, useTheme } from "@mui/material/styles";
+import { useTheme as useCustomTheme } from "../../../context/ThemeContext"; // Only for toggleMode
 
 const SearchWrapper = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: "rgba(0,0,0,0.05)",
-  "&:hover": { backgroundColor: "rgba(0,0,0,0.1)" },
+  backgroundColor: theme.palette.mode === "dark" ? "#222" : "#E0E0E0", // Same as NavBar bottom border
+  "&:hover": {
+    backgroundColor: theme.palette.mode === "dark" ? "#222" : "#E0E0E0",
+  },
   marginRight: theme.spacing(2),
   width: "100%",
   [theme.breakpoints.up("sm")]: { width: "auto" },
 }));
 
-const NavBar = ({ currentPath }) => {
-  const theme = useMuiTheme();
-  const { mode, toggleMode } = useTheme();
+const NavBar = ({ currentPath, onNotificationClick }) => {
+  const theme = useTheme();
+  const { mode, toggleMode } = useCustomTheme();
 
   const iconStyle = {
     color: theme.palette.text.secondary,
   };
 
+  const sidebarBorderColor = theme.palette.mode === "dark" ? "#222" : "#E0E0E0";
+  const sidebarBorderWidth = "2px";
+
   return (
     <AppBar
-      color="inherit"
+      position="static"
       elevation={0}
       sx={{
-        width: 948,
-        height: 68,
-        minWidth: 1050,
-        right: "385px",
-        borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
-        borderRadius: 0,
         bgcolor: theme.palette.background.paper,
-        display: "flex",
-        justifyContent: "space-between",
-        px: "28px",
-        pt: "20px",
-        pb: "20px",
-        opacity: 1,
-        boxSizing: "border-box",
+        color: "text.primary",
+        borderBottom: `${sidebarBorderWidth} solid ${sidebarBorderColor}`,
+        boxShadow: "none",
+        m: 0,
+        p: 2,
       }}
     >
       <Toolbar
@@ -122,7 +123,7 @@ const NavBar = ({ currentPath }) => {
             </Stack>
           </IconButton>
 
-          <IconButton>
+          <IconButton onClick={onNotificationClick}>
             <NotificationsNoneTwoToneIcon sx={iconStyle} />
           </IconButton>
 

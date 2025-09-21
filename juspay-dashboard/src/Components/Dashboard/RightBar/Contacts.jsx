@@ -1,80 +1,44 @@
-import { useEffect, useState } from "react";
-import { Box, Paper, Typography, Avatar, Stack } from "@mui/material";
+import { Paper, Typography, Box, Avatar } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
-const ContactItem = ({ name, avatar }) => (
-  <Box
-    sx={{
-      width: 240,
-      height: 32,
-      gap: 1, // 8px
-      opacity: 1,
-      borderRadius: 1, // 8px
-      p: 0.5, // 4px
-      display: "flex",
-      alignItems: "center",
-      bgcolor: "#F7F9FB",
-      mb: 1,
-    }}
-  >
-    <Avatar
-      src={avatar}
-      sx={{
-        width: 24,
-        height: 24,
-        borderRadius: 1, // 8px
-        mr: 1,
-        bgcolor: "transparent",
-        opacity: 1,
-      }}
-      variant="circular"
-    />
-    <Typography
-      sx={{
-        width: 80,
-        height: 20,
-        borderRadius: 1, // 8px
-        opacity: 1,
-        fontWeight: 500,
-        fontSize: 14,
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-        whiteSpace: "nowrap",
-      }}
-    >
-      {name}
-    </Typography>
-  </Box>
-);
+const contacts = [
+  {
+    name: "Jane Smith",
+    email: "jane@example.com",
+    image: "https://randomuser.me/api/portraits/women/44.jpg",
+  },
+  {
+    name: "John Doe",
+    email: "john@example.com",
+    image: "https://randomuser.me/api/portraits/men/32.jpg",
+  },
+  {
+    name: "Alice Johnson",
+    email: "alice@example.com",
+    image: "https://randomuser.me/api/portraits/women/12.jpg",
+  },
+  {
+    name: "Bob Brown",
+    email: "bob@example.com",
+    image: "https://randomuser.me/api/portraits/men/65.jpg",
+  },
+];
 
 const Contacts = () => {
-  const [contacts, setContacts] = useState([]);
-
-  useEffect(() => {
-    // Dummy API for random users
-    fetch("https://randomuser.me/api/?results=3")
-      .then((res) => res.json())
-      .then((data) => {
-        setContacts(
-          data.results.map((user) => ({
-            name: `${user.name.first} ${user.name.last}`,
-            avatar: user.picture.thumbnail,
-          }))
-        );
-      });
-  }, []);
+  const theme = useTheme();
 
   return (
     <Paper
       elevation={0}
       sx={{
         width: 240,
-        height: 306,
-        gap: 1, // 8px
+        minHeight: 180,
+        gap: 1,
         opacity: 1,
-        borderRadius: 2,
         display: "flex",
         flexDirection: "column",
         alignItems: "flex-start",
+        mb: 3,
         p: 2,
         boxSizing: "border-box",
       }}
@@ -89,11 +53,64 @@ const Contacts = () => {
       >
         Contacts
       </Typography>
-      <Stack direction="column" spacing={1}>
-        {contacts.map((contact, idx) => (
-          <ContactItem key={idx} name={contact.name} avatar={contact.avatar} />
-        ))}
-      </Stack>
+      {contacts.map((contact, idx) => (
+        <Box
+          key={idx}
+          sx={{
+            width: 240,
+            height: 44,
+            opacity: 1,
+            display: "flex",
+            alignItems: "center",
+            mb: 1,
+
+            borderRadius: 1,
+            px: 1,
+            py: 0.5,
+          }}
+        >
+          <Avatar
+            src={contact.image}
+            alt={contact.name}
+            sx={{
+              width: 32,
+              height: 32,
+              mr: 1.5,
+              borderRadius: 4,
+            }}
+            variant="rounded"
+          />
+          <Box sx={{ minWidth: 0 }}>
+            <Typography
+              variant="body2"
+              color="text.primary"
+              sx={{
+                fontWeight: 500,
+                fontSize: 14,
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                maxWidth: 150,
+              }}
+            >
+              {contact.name}
+            </Typography>
+            <Typography
+              variant="caption"
+              color="text.secondary"
+              sx={{
+                fontSize: 12,
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                maxWidth: 150,
+              }}
+            >
+              {contact.email}
+            </Typography>
+          </Box>
+        </Box>
+      ))}
     </Paper>
   );
 };
