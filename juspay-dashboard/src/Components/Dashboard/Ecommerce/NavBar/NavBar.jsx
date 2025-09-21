@@ -50,13 +50,71 @@ const NavBar = ({ currentPath, onNotificationClick }) => {
               <Icon sx={iconStyle} />
             </IconButton>
           ))}
-          <Typography
-            variant="h6"
-            noWrap
-            sx={{ color: theme.palette.text.primary }}
-          >
-            {currentPath || "Dashboard / Default"}
-          </Typography>
+          {(() => {
+            const path = (currentPath || "Dashboard / Default").split(" / ");
+            return (
+              <Box
+                sx={{
+                  width: 184,
+                  height: 28,
+                  borderRadius: 8,
+                  bgcolor: "var(--black-40, #FFFFFF66)",
+                  display: "flex",
+                  alignItems: "center",
+                  opacity: 1,
+                }}
+              >
+                <Typography
+                  sx={{
+                    width: 98,
+                    height: 28,
+                    borderRadius: 8,
+                    fontWeight: 500,
+                    fontSize: 16,
+                    lineHeight: "28px",
+                    background: "transparent",
+                    color: "grey",
+                    opacity: 1,
+                    px: 1,
+                  }}
+                >
+                  {path[0]}
+                </Typography>
+                <Typography
+                  sx={{
+                    width: 98,
+                    height: 28,
+                    borderRadius: 8,
+                    fontWeight: 500,
+                    fontSize: 16,
+                    lineHeight: "28px",
+                    background: "transparent",
+                    color: "grey",
+                    opacity: 1,
+                    px: 1,
+                  }}
+                >
+                  /
+                </Typography>
+                <Typography
+                  sx={{
+                    width: 98,
+                    height: 28,
+                    borderRadius: 8,
+                    fontWeight: 500,
+                    fontSize: 16,
+                    lineHeight: "28px",
+                    background: "transparent",
+                    color: "#000",
+                    opacity: 1,
+                    px: 1,
+                  }}
+                >
+                  {path[1]}
+                </Typography>
+              </Box>
+            );
+          })()}
         </Box>
 
         <Box
