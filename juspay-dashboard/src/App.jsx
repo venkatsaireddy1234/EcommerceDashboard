@@ -1,7 +1,12 @@
 import { StrictMode } from "react";
 import { ThemeProvider as MuiThemeProvider, createTheme } from "@mui/material";
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import DashboardLayout from "./Components/Dashboard/DashboardLayout";
 import { Box } from "@mui/material";
 import { useState } from "react";
@@ -123,26 +128,12 @@ function App() {
   return (
     <StrictMode>
       <ThemeProvider>
-        <Router>
+        <Router future={{ v7_startTransition: true }}>
           <Routes>
-            <Route
-              path="/dashboard"
-              element={
-                <DashboardLayout>
-                  <Ecommerce />
-                </DashboardLayout>
-              }
-            />
-            <Route
-              path="/orders"
-              element={
-                <DashboardLayout>
-                  <OrdersPage />
-                </DashboardLayout>
-              }
-            />
+            <Route path="/" element={<Layout />} />
+            <Route path="/dashboard" element={<Layout />} />
+            <Route path="/orders" element={<Layout />} />
           </Routes>
-          <Layout />
         </Router>
       </ThemeProvider>
     </StrictMode>
