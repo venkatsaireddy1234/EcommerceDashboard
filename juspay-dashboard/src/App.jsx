@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { ThemeProvider as MuiThemeProvider, createTheme } from "@mui/material";
 import "./App.css";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Box } from "@mui/material";
 import { useState } from "react";
 import { ThemeProvider } from "./context/ThemeContext";
@@ -13,7 +13,8 @@ import NavBar from "./Components/Dashboard/Ecommerce/NavBar";
 import OrdersPage from "./Components/Dashboard/OrdersPage";
 
 function Layout() {
-  const [rightBarOpen, setRightBarOpen] = useState(false);
+  // Set rightBarOpen to true by default so RightBar is open on initial render
+  const [rightBarOpen, setRightBarOpen] = useState(true);
   const [currentPage, setCurrentPage] = useState("ecommerce");
   const [currentPath, setCurrentPath] = useState("Dashboard / Ecommerce");
   const { mode } = useTheme();
@@ -30,7 +31,7 @@ function Layout() {
       secondary: { main: "#dc004e" },
       background: {
         default: mode === "light" ? "#fff" : "#000",
-        paper: mode === "light" ? "#fff" : "#000", // <-- changed here
+        paper: mode === "light" ? "#fff" : "#000",
       },
       text: {
         primary: mode === "light" ? "#1C1C1C" : "#fff",
@@ -50,7 +51,6 @@ function Layout() {
         }}
       >
         <SideBar onPathChange={setCurrentPath} onPageChange={setCurrentPage} />
-        {/* Main content + RightBar in the same flex row */}
         <Box
           sx={{
             display: "flex",
@@ -59,7 +59,6 @@ function Layout() {
             flexDirection: "row",
           }}
         >
-          {/* Main content column */}
           <Box
             sx={{
               display: "flex",
@@ -88,10 +87,8 @@ function Layout() {
                 />
               )}
               {currentPage === "orders" && <OrdersPage />}
-              {/* ...other pages... */}
             </Box>
           </Box>
-          {/* RightBar sits next to main content */}
           <Box
             sx={{
               width: rightBarOpen ? 320 : 0,

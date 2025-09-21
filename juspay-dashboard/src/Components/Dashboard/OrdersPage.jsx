@@ -67,11 +67,11 @@ const OrdersPage = () => {
   const [loading, setLoading] = useState(true);
 
   const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
   const checkboxColor = theme.palette.mode === "light" ? "#111" : "#F7F9FB";
   const toolbarBg = theme.palette.mode === "light" ? "#F7F9FB" : "#222";
   const headerBg = theme.palette.mode === "light" ? "#F7F9FB" : "#333";
   const searchBg = theme.palette.mode === "light" ? "#F7F9FB" : "#333";
-  const paginationBg = theme.palette.mode === "light" ? "#F7F9FB" : "#333";
   const textColor = theme.palette.mode === "light" ? "#111" : "#F7F9FB";
 
   // Fetch dummy users and generate orders
@@ -140,8 +140,10 @@ const OrdersPage = () => {
     visibleOrders.every((order) => checked[order.orderId]);
 
   return (
-    <Box sx={{ mt: 2 }}>
-      <Box sx={{ p: 3 }}>
+    <Box
+      sx={{ mt: 2, height: "200px", display: "flex", justifyContent: "center" }}
+    >
+      <Box sx={{ p: 2 }}>
         <Box
           sx={{
             width: 67,
@@ -412,24 +414,28 @@ const OrdersPage = () => {
                   display: "flex",
                   justifyContent: "flex-end",
                   p: 2,
-                  bgcolor: "#F7F9FB", // <-- Set pagination background color
+                  bgcolor: isDark ? "#1C1C1C" : "#e0e0e0",
                   borderBottomLeftRadius: 8,
                   borderBottomRightRadius: 8,
+                  bgcolor: toolbarBg,
                 }}
               >
                 <Pagination
                   count={pageCount}
                   page={page}
                   onChange={(_, value) => setPage(value)}
-                  color="primary"
+                  color={isDark ? "#1C1C1C" : "#fff"}
                   shape="rounded"
-                  showFirstButton
-                  showLastButton
                   sx={{
+                    "& .MuiPaginationItem-root": {
+                      color: isDark ? "#fff" : "#1C1C1C",
+                    },
                     "& .Mui-selected": {
-                      bgcolor: "#F7F9FB !important", // <-- Active page bg color
-                      color: "#1C1C1C !important",
-                      borderRadius: "8px",
+                      bgcolor: isDark ? "#333" : "#e0e0e0",
+                      color: isDark ? "#fff" : "#1C1C1C",
+                      "&:hover": {
+                        bgcolor: isDark ? "#1C1C1C" : "#e0e0e0",
+                      },
                     },
                   }}
                 />

@@ -4,8 +4,9 @@ import CardsGrid from "./CardsGrid";
 import RevenueByLocation from "./RevenueByLocation";
 import TopSellingProducts from "./TopSellingProducts";
 import TotalSales from "./TotalSales";
-import ProjectionsVsActuals from "./ProjectionsVsActuals";
 import Revenue from "./Revenue";
+import SalesBarChart from "./SalesBarChart";
+import LineChart from "./LineGraph";
 
 const Ecommerce = ({ onOrdersClick, currentPath }) => {
   const theme = useTheme();
@@ -20,7 +21,7 @@ const Ecommerce = ({ onOrdersClick, currentPath }) => {
         overflow: "hidden",
         display: "flex",
         flexDirection: "column",
-        bgcolor: theme.palette.background.default, // Ensures correct bg in dark mode
+        bgcolor: theme.palette.background.default,
         pb: 3,
       }}
     >
@@ -45,7 +46,7 @@ const Ecommerce = ({ onOrdersClick, currentPath }) => {
           }}
         >
           <CardsGrid onOrdersClick={onOrdersClick} />
-          <ProjectionsVsActuals />
+          <SalesBarChart />
         </Box>
         <Box
           sx={{
@@ -56,7 +57,8 @@ const Ecommerce = ({ onOrdersClick, currentPath }) => {
             px: 3,
           }}
         >
-          <Revenue />
+          {/* <Revenue /> */}
+          <LineChart />
           <RevenueByLocation />
         </Box>
         <Box
